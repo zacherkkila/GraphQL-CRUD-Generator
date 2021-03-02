@@ -1,0 +1,21 @@
+{
+  "name": "graphql-crud-gen",
+  "version": "1.0.0",
+  "main": "index.js",
+  "module": "main.js",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "change-case": "^4.1.2",
+    "command-line-args": "^5.1.1",
+    "command-line-usage": "^6.1.1",
+    "esm": "^3.2.25",
+    "graphql": "^15.5.0",
+    "node-fetch": "^2.6.1",
+    "prettier": "^2.2.1"
+  },
+  "scripts": {
+    "start" : "node -r esm main.js",
+    "generate": "node -r esm main.js"
+  }
+}
