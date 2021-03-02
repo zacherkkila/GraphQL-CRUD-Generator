@@ -1,5 +1,5 @@
 import { getIntrospectionQuery } from "graphql";
-import { clientMutationId, mutationTypeName, GqlKinds } from './constants'
+import { clientMutationId, mutationTypeName, primaryKey, GqlKinds } from './constants'
 const fetch = require("node-fetch");
 const commandLineArgs = require("command-line-args");
 import * as changeCase from "change-case";
@@ -61,21 +61,22 @@ const getPayload = (objectType, payload = "") => {
   return cleanupGraphqlString(payload);
 };
 
-const getScalarArgs = (inputType, argsObject, inputString = "") => {
+const getScalarArgs = (inputType, argsObject, inputString = "", ignorePrimaryKey = false) => {
   inputType.inputFields.forEach((field) => {
-    if (field.name !== clientMutationId) {
+    if (field.name !== clientMutationId && !(ignorePrimaryKey && field.name === primaryKey)) {
       const type = field.type.ofType || field.type;
       if (type.kind === GqlKinds.SCALAR || type.kind === GqlKinds.ENUM) {
         inputString += `${field.name}:$${field.name}, `;
         argsObject["$" + field.name] = `${type.name}${
-          field.type.kind === GqlKinds.NON_NULL ? "!" : ""
+          (field.type.kind === GqlKinds.NON_NULL) ? "!" : ""
         }`;
       } else if (type.kind === GqlKinds.INPUT_OBJECT) {
         const subType = getType(type.name);
         inputString += `${field.name}:{${getScalarArgs(
           subType,
           argsObject,
-          inputString
+          inputString,
+          ignorePrimaryKey
         )}}, `;
       }
     }
@@ -83,20 +84,20 @@ const getScalarArgs = (inputType, argsObject, inputString = "") => {
   return cleanupGraphqlString(inputString);
 };
 
-const getMutationArgs = (mutation, argsArray) => {
+const getMutationArgs = (mutation, argsArray, ignorePrimaryKey = false) => {
   const input = mutation.args[0];
   const inputType = getType(input.type.ofType.name);
-  return getScalarArgs(inputType, argsArray);
+  return getScalarArgs(inputType, argsArray, "", ignorePrimaryKey);
 };
 
-const generateMutationString = (mutationName) => {
+const generateMutationString = (mutationName, ignorePrimaryKey = false) => {
   const mutations = schema.types.find((x) => x.name == mutationTypeName);
   const mutation = mutations.fields.find((x) => x.name === mutationName);
 
   if (mutation) {
     console.log("Generating mutation: " + mutationName);
     let argsObject = {};
-    const inputString = getMutationArgs(mutation, argsObject);
+    const inputString = getMutationArgs(mutation, argsObject, ignorePrimaryKey);
     const formattedArgs = JSON.stringify(argsObject)
       .replace("{", "")
       .replace("}", "")
@@ -110,7 +111,6 @@ const generateMutationString = (mutationName) => {
                 ${mutationName}(
                     input: {${inputString}}
                 ) {
-                    clientMutationId
                     ${gqlTypeName} {
                         ${payload}
                     }
@@ -124,7 +124,7 @@ const generateMutationString = (mutationName) => {
 };
 
 const generateMutations = () => {
-  const createMutation = generateMutationString("create" + gqlTableName);
+  const createMutation = generateMutationString("create" + gqlTableName, true);
 
   const updateMutation = generateMutationString("update" + gqlTableName);
 

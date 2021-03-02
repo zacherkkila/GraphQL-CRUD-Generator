@@ -1,5 +1,6 @@
 export const clientMutationId = "clientMutationId"
 export const mutationTypeName = "Mutation"
+export const primaryKey = "id"
 
 export const GqlKinds = {
     SCALAR:"SCALAR",
