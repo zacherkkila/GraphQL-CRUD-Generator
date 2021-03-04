@@ -17,5 +17,8 @@
   "scripts": {
     "start" : "node -r esm main.js",
     "generate": "node -r esm main.js"
+  },
+  "bin":  {
+    "crud-gen" : "./crud-gen.sh"
   }
 }
