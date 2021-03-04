@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const getIntrospectionQuery = require("graphql");
+const { getIntrospectionQuery } = require("graphql");
 const constants = require('./constants')
 const clientMutationId = constants.clientMutationId;
 const mutationTypeName = constants.mutationTypeName;
