@@ -1,11 +1,7 @@
 #!/usr/bin/env node
 
 const { getIntrospectionQuery } = require("graphql");
-const constants = require('./constants')
-const clientMutationId = constants.clientMutationId;
-const mutationTypeName = constants.mutationTypeName;
-const primaryKey = constants.primaryKey;
-const GqlKinds = constants.GqlKinds;
+const { clientMutationId, mutationTypeName, primaryKey, GqlKinds }  = require('./constants')
 const fetch = require("node-fetch");
 const commandLineArgs = require("command-line-args");
 const changeCase = require("change-case");
