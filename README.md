@@ -2,11 +2,11 @@
 Quick and dirty graphql CRUD generation by GraphQL introspection
 
 
-Usage: `npm generate -- -t <table> -u <graphql_url> [-w:writefile] [-r:replace] -o <output_file>`
+Usage: `npm run generate -- -t <table> -u <graphql_url> [-w:writefile] [-r:replace] -o <output_file>`
 
-Minimal Usage: `npm generate -- -t users`
+Minimal Usage: `npm run generate -- -t users`
 
-Example: `npm generate -- -t users -u http://localhost:5678 -wr -o Users.graphql`
+Example: `npm run generate -- -t users -u http://localhost:5678 -wr -o Users.graphql`
 
 ## Command Line Options
 

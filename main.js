@@ -25,9 +25,9 @@ const optionDefinitions = [
 const options = commandLineArgs(optionDefinitions)
 
 console.log("GraphQL CRUD Generator\n")
-console.log("Usage: npm generate -- -t <table> -u <graphql_url> [-w:writefile] [-r:replace] -o <output_file>")
-console.log("Minimal Usage: npm generate -- -t users")
-console.log("Example: npm generate -- -t users -u http://localhost:5678 -wr -o Users.graphql\n")
+console.log("Usage: npm run generate -- -t <table> -u <graphql_url> [-w:writefile] [-r:replace] -o <output_file>")
+console.log("Minimal Usage: npm run generate -- -t users")
+console.log("Example: npm run generate -- -t users -u http://localhost:5678 -wr -o Users.graphql\n")
 
 if(!options.table) {
     console.log("Incorrect command line args\n")
