@@ -36,8 +36,8 @@ if(!options.table) {
 }
 
 const tableName = options.table;
-const gqlTableName = changeCase.capitalCase(tableName);
-const gqlTypeName = changeCase.camelCase(tableName);
+const gqlTableName = changeCase.capitalCase(tableName, {delimiter:""});
+const gqlTypeName = changeCase.camelCase(tableName, {delimiter:""});
 const outFile = options.out || (options.dir || "./") + gqlTableName + ".graphql";
 
 const url = options.url || "http://localhost:5678/graphql";
