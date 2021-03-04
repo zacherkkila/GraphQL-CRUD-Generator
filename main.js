@@ -19,13 +19,14 @@ const optionDefinitions = [
   { name: "url", alias: "u", type: String },
   { name: "write", alias: "w", type: Boolean },
   { name: "out", alias: "o", type: String },
+  { name: "dir", alias: "d", type: String },
   { name: "replace", alias: "r", type: Boolean },
 ];
 
 const options = commandLineArgs(optionDefinitions)
 
 console.log("GraphQL CRUD Generator\n")
-console.log("Usage: npm run generate -- -t <table> -u <graphql_url> [-w:writefile] [-r:replace] -o <output_file>")
+console.log("Usage: npm run generate -- -t <table> -u <graphql_url> [-w:writefile] [-r:replace] -o <output_file> -d <base_dir>")
 console.log("Minimal Usage: npm run generate -- -t users")
 console.log("Example: npm run generate -- -t users -u http://localhost:5678 -wr -o Users.graphql\n")
 
@@ -37,7 +38,7 @@ if(!options.table) {
 const tableName = options.table;
 const gqlTableName = changeCase.capitalCase(tableName);
 const gqlTypeName = changeCase.camelCase(tableName);
-const outFile = options.out || gqlTableName + ".graphql";
+const outFile = options.out || options.dir + "" + gqlTableName + ".graphql";
 
 const url = options.url || "http://localhost:5678/graphql";
 
