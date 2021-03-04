@@ -1,6 +1,30 @@
 # GraphQL CRUD Generator
 Quick and dirty graphql CRUD generation by GraphQL introspection
 
+### Installation
+
+In project
+
+`yarn add git+https://github.com/zacherkkila/GraphQL-CRUD-Generator.git`
+
+To run
+
+`yarn crud-gen <options>`
+
+### Common Setup
+
+Add to a package.json script with your desired output directory in the project
+
+    "scripts": {
+        "gen": "yarn crud-gen -d ./src/graphql/"
+        ...
+    }
+    
+and call it like so
+
+`yarn gen -t checklistItem -wr`
+
+### Usage Documentation
 
 Usage: `npm run generate -- -t <table> -u <graphql_url> [-w:writefile] [-r:replace] -o <output_file>`
 
