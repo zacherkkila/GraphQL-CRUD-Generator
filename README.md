@@ -16,4 +16,5 @@ Example: `npm run generate -- -t users -u http://localhost:5678 -wr -o Users.gra
 | `--url, -u`     | GraphQL endpoint url                                      | `http://localhost:5678`  | `false` |
 | `--write, -w`   | Write flag: When set output will append to a file         | `false`                  | `false` |
 |` --replace, r`  | Replace flag: When used with -w the file will be replaced | `false`                  | `false` |
-| `--out, -o`     | Output file for when -w is set                            | ` <Table>.graphql`       | `false` |
+| `--out, -o`     | Output file for when -w is set                            | `<Table>.graphql`        | `false` |
+| `--dir, -d`     | Base directory for when -w is set and -o isn't            | `./`                     | `false` |
