@@ -15,10 +15,10 @@
     "prettier": "^2.2.1"
   },
   "scripts": {
-    "start" : "node -r esm main.js",
-    "generate": "node -r esm main.js"
+    "start": "node main.js",
+    "generate": "node main.js"
   },
-  "bin":  {
-    "crud-gen" : "./crud-gen.sh"
+  "bin": {
+    "crud-gen": "./main.js"
   }
 }

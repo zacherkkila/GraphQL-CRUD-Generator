@@ -1,10 +1,17 @@
-export const clientMutationId = "clientMutationId"
-export const mutationTypeName = "Mutation"
-export const primaryKey = "id"
+const clientMutationId = "clientMutationId"
+const mutationTypeName = "Mutation"
+const primaryKey = "id"
 
-export const GqlKinds = {
+const GqlKinds = {
     SCALAR:"SCALAR",
     ENUM:"ENUM",
     NON_NULL:"NON_NULL",
     INPUT_OBJECT:"INPUT_OBJECT"
+}
+
+module.exports = {
+    clientMutationId,
+    mutationTypeName,
+    primaryKey,
+    GqlKinds
 }
